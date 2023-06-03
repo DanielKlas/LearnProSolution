@@ -10,8 +10,7 @@ app.get('/', (req, res) => {
   res.render('index.ejs');
 });
 
-// Make sure the app is listening on the correct port
-
+// Custom port for Heroku, cannot be changed
 let port = process.env.PORT;
 if (port == null || port == "") {
   port = 8000;
