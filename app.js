@@ -6,6 +6,10 @@ const app = express();
 
 app.set('view engine', 'ejs');
 
+app.get('/', (req, res) => {
+  res.render('index');
+});
+
 // Make sure the app is listening on the correct port
 
 let port = process.env.PORT;
