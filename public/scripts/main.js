@@ -1,12 +1,13 @@
 var table = document.getElementById('data-body');
 
 table.addEventListener('click', function(event) {
+  console.log('Table cell clicked');
   var target = event.target;
 
-  if (target.tagName === 'TD' && !target.hasAttribute('data-clicked')) {
+  if (target.tagName === 'TH' && !target.hasAttribute('data-clicked')) {
     target.setAttribute('data-clicked', 'yes');
     target.setAttribute('data-text', target.innerHTML);
-
+    
     var input = document.createElement('input');
     input.setAttribute('type', 'text');
     input.value = target.innerHTML;
@@ -24,8 +25,6 @@ table.addEventListener('click', function(event) {
       var current_text = this.value;
 
       if (orig_text !== current_text) {
-        // need to add regex and database call here
-        // must be a single database call as multiple will affect performance when opening and closing connection
         td.innerHTML = current_text;
         console.log(orig_text + ' now changed to ' + current_text);
       } else {
