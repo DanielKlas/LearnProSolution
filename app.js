@@ -1,7 +1,7 @@
 //Set dependencies
 const express = require('express');
 const app = express();
-const mime = require('mime');
+// const mime = require('mime');
 const mysql = require('mysql');
 var path = require('path');
 require('dotenv').config();
