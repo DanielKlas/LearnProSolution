@@ -1,17 +1,10 @@
 //Set dependencies
 const express = require('express');
 const app = express();
-// const mime = require('mime');
+const { Client } = require('pg');
 const mysql = require('mysql');
 var path = require('path');
 require('dotenv').config();
-
-//Set up static file access
-// app.use(express.static('public', {
-//   setHeaders: (res, path) => {
-//     res.setHeader('Content-Type', mime.getType(path));
-//   }
-// }));
 
 app.use(express.static(__dirname + 'public'));
 
@@ -36,3 +29,28 @@ if (port == null || port == "") {
   port = 8000;
 }
 app.listen(port);
+
+// Connect to database
+const client = new Client({
+  connectionString: process.env.DATABASE_URL,
+  ssl: {
+    rejectUnauthorized: false,
+  },
+});
+
+client.connect()
+  .then(() => {
+    console.log('Connected to the database');
+    // Perform database operations here
+  })
+  .catch((err) => {
+    console.error('Error connecting to the database:', err);
+  });
+
+  client.end()
+  .then(() => {
+    console.log('Disconnected from the database');
+  })
+  .catch((err) => {
+    console.error('Error disconnecting from the database:', err);
+  });
