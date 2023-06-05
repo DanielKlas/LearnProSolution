@@ -13,6 +13,8 @@ app.use(express.static('public', {
   }
 }));
 
+app.use(express.static(__dirname + '/public'));
+
 //Set up views
 app.set('views', './views');
 app.set('view engine', 'ejs');
