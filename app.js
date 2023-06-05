@@ -7,13 +7,13 @@ var path = require('path');
 require('dotenv').config();
 
 //Set up static file access
-app.use(express.static('public', {
-  setHeaders: (res, path) => {
-    res.setHeader('Content-Type', mime.getType(path));
-  }
-}));
+// app.use(express.static('public', {
+//   setHeaders: (res, path) => {
+//     res.setHeader('Content-Type', mime.getType(path));
+//   }
+// }));
 
-app.use(express.static(__dirname));
+app.use(express.static(__dirname + 'public'));
 
 //Set up views
 app.set('views', './views');
