@@ -1,8 +1,8 @@
 //Set dependencies
 const express = require('express');
 const app = express();
-const mysql = require('mysql');
 const mime = require('mime');
+const mysql = require('mysql');
 var path = require('path');
 require('dotenv').config();
 
@@ -14,7 +14,7 @@ app.use(express.static('public', {
 }));
 
 //Set up views
-app.set('views', './views')
+app.set('views', './views');
 app.set('view engine', 'ejs');
 
 app.get('/', (req, res) => {
