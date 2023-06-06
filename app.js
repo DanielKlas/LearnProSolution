@@ -39,13 +39,26 @@ const client = new Client({
   }
 });
 
-client.connect();
-
-client.query('SELECT table_schema,table_name FROM information_schema.tables;', (err, res) => {
-  if (err) throw err;
-  for (let row of res.rows) {
-    console.log(JSON.stringify(row));
+client.connect((err) => {
+  if (err) {
+    console.error('Error connecting to the database:', err);
+    return;
   }
-  client.end();
-  console.log("Connection successfully closed.")
+
+  console.log('Connection to the database successful.');
+
+  client.query('SELECT table_schema, table_name FROM information_schema.tables;', (err, res) => {
+    if (err) {
+      console.error('Error executing query:', err);
+      client.end();
+      return;
+    }
+
+    for (let row of res.rows) {
+      console.log(JSON.stringify(row));
+    }
+
+    client.end();
+    console.log('Connection successfully closed.');
+  });
 });
