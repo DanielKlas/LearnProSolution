@@ -47,4 +47,5 @@ client.query('SELECT table_schema,table_name FROM information_schema.tables;', (
     console.log(JSON.stringify(row));
   }
   client.end();
+  console.log("Connection successfully closed.")
 });
