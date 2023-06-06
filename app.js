@@ -30,27 +30,21 @@ if (port == null || port == "") {
 }
 app.listen(port);
 
-// Connect to database
+// Databasse connection
+
 const client = new Client({
   connectionString: process.env.DATABASE_URL,
   ssl: {
-    rejectUnauthorized: false,
-  },
+    rejectUnauthorized: false
+  }
 });
 
-client.connect()
-  .then(() => {
-    console.log('Connected to the database');
-    // Perform database operations here
-  })
-  .catch((err) => {
-    console.error('Error connecting to the database:', err);
-  });
+client.connect();
 
-  client.end()
-  .then(() => {
-    console.log('Disconnected from the database');
-  })
-  .catch((err) => {
-    console.error('Error disconnecting from the database:', err);
-  });
+client.query('SELECT table_schema,table_name FROM information_schema.tables;', (err, res) => {
+  if (err) throw err;
+  for (let row of res.rows) {
+    console.log(JSON.stringify(row));
+  }
+  client.end();
+});
