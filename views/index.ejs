@@ -1,36 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
-<meta charset="UTF-8">
-<title>LearnPro Task Solution</title>
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<link rel="stylesheet" type="text/css" href="/stylesheets/main.css">
-
-<style>
-</style>
-
+<head>
+  <meta charset="UTF-8">
+  <title>LearnPro Task Solution</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="/stylesheets/main.css">
+</head>
 <body>
-
+  <div class="display-container">
     <table id="data-table">
+      <tr>
+        <th>Asset tag:</th>
+        <th>Assigned to:</th>
+        <th>Date bought:</th>
+        <th>Date decommissioned:</th>
+        <th>Device type:</th>
+        <th>Operating system:</th>
+      </tr>
+      <% data.forEach(function(entry) { %>
         <tr>
-          <th>Asset tag:</th>
-          <th>Assigned to:</th>
-          <th>Date bought:</th>
-          <th>Date decommissioned:</th>
-          <th>Device type:</th>
-          <th>Operating system:</th>
+          <td><%= entry.asset_tag %></td>
+          <td><%= entry.assigned_to %></td>
+          <td><%= entry.formatted_date_bought %></td>
+          <td><%= entry.formatted_date_decommissioned %></td>
+          <td><%= entry.device_type %></td>
+          <td><%= entry.operating_system %></td>
+          <td>
+            <button class="select-btn"
+              data-asset="<%= entry.asset_tag %>"
+              data-assigned="<%= entry.assigned_to %>"
+              data-date-bought="<%= entry.formatted_date_bought %>"
+              data-date-decommissioned="<%= entry.formatted_date_decommissioned %>"
+              data-device-type="<%= entry.device_type %>"
+              data-operating-system="<%= entry.operating_system %>">
+              Select
+            </button>
+          </td>
         </tr>
+      <% }); %>
+    </table>
+  </div>
+  <p>Total results: <span id="total-results"></span></p>
 
-        <tr id="data-body">
-          <th>1</th>
-          <th>2</th>
-          <th>3</th>
-          <th>4</th>
-          <th>5</th>
-          <th>6</th>
-        </tr>
+  <tr>
+    <th colspan="2">
+      <form action="/submit" method="POST">
+        <table>
+          <tr>
+            <th>Asset Tag:</th>
+            <th>Assigned To:</th>
+            <th>Date Bought:</th>
+            <th>Date Decommissioned:</th>
+            <th>Device Type:</th>
+            <th>Operating System:</th>
+          </tr>
+          <tr>
+            <td><input type="text" id="assetTag" name="assetTag" required></td>
+            <td><input type="text" id="assignedTo" name="assignedTo"></td>
+            <td><input type="text" id="dateBought" name="dateBought" required></td>
+            <td><input type="text" id="dateDecommissioned" name="dateDecommissioned"></td>
+            <td><input type="text" id="deviceType" name="deviceType" required></td>
+            <td><input type="text" id="operatingSystem" name="operatingSystem" required></td>
+          </tr>
+          <tr>
+            <td colspan="6" class="button-row">
+              <button type="submit">Submit</button>
+              <button id="deleteButton" type="button" onclick="confirmDelete()">Delete</button>
+            </td>
+          </tr>
+        </table>
+      </form>
+    </th>
+  </tr>
 
-      </table>
-
-<script src="/scripts/main.js"></script>
+  <script src="/scripts/event_listeners.js"></script>
+  <script src="/scripts/input_sanitizer.js"></script>
 </body>
 </html>
