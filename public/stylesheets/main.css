@@ -29,11 +29,3 @@ tr:nth-child(even) {
   overflow: auto;
   border: solid 1px;
 }
-
-.highlight-entry {
-  border: 0;
-  font-family: inherit;
-  font-size: inherit;
-  text-align: inherit;
-  background-color: Orange;
-}

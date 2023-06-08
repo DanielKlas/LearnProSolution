@@ -64,9 +64,14 @@ app.post('/submit', async (req, res) => {
       formData.dateDecommissioned = null;
     }
 
-    const db = await createDatabaseConnection()
+    const assetTagPattern = /^[a-zA-Z]+-[a-zA-Z]+-\d+$/;
+    if (!formData.assetTag.match(assetTagPattern)) {
+      res.status(200).send("Invalid asset tag format, please use the Location-DeviceType-00 format.");
+    }
 
-    const existingRecord = await db.query('SELECT * FROM learnprosolution WHERE asset_tag = ?', [formData.assetTag]);
+    const db = await createDatabaseConnection();
+
+    const [existingRecord] = await db.query('SELECT * FROM learnprosolution WHERE asset_tag = ?', [formData.assetTag]);
 
     if (existingRecord.length > 0) {
       await db.query('UPDATE learnprosolution SET assigned_to = ?, date_bought = ?, date_decommissioned = ?, device_type = ?, operating_system = ? WHERE asset_tag = ?', [formData.assignedTo, formData.dateBought, formData.dateDecommissioned, formData.deviceType, formData.operatingSystem, formData.assetTag]);;
