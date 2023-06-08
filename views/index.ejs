@@ -40,7 +40,8 @@
       <% }); %>
     </table>
   </div>
-  <p>Total results: <span id="total-results"></span></p>
+
+  <br><hr>
 
   <tr>
     <th colspan="2">
@@ -65,15 +66,19 @@
           <tr>
             <td colspan="6" class="button-row">
               <button type="submit">Submit</button>
-              <button id="deleteButton" type="button" onclick="confirmDelete()">Delete</button>
             </td>
           </tr>
         </table>
       </form>
+
+      <form action="/delete" method="POST">
+      <p>Enter asset tag here to delete entry:</p>
+      <input type="text" id="assetTag" name="assetTag" required></td>
+        <button type="submit">Delete</button>
+      </form>  
     </th>
   </tr>
 
   <script src="/scripts/event_listeners.js"></script>
-  <script src="/scripts/input_sanitizer.js"></script>
 </body>
 </html>

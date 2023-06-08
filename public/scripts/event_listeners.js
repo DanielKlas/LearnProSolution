@@ -1,5 +1,3 @@
-const deleteButton = document.getElementById('deleteButton');
-
 document.addEventListener('DOMContentLoaded', () => {
   const selectButtons = document.querySelectorAll('.select-btn');
 
@@ -20,12 +18,4 @@ document.addEventListener('DOMContentLoaded', () => {
       document.getElementById('operatingSystem').value = operatingSystem;
     });
   });
-});
-
-deleteButton.addEventListener('click', () => {
-  const confirmation = confirm('Are you sure you want to delete this entry?');
-  if (confirmation) {
-    dataForm.action = '/delete';
-    dataForm.submit();
-  }
 });
